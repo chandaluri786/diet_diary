@@ -1,0 +1,49 @@
+body{
+background-image : url("blue6.jpg");
+background-repeat : no repeat;
+background-attachment:fixed;
+background-size:cover;
+}
+table{
+margin-left:auto;
+margin-right:auto;
+width:75%;
+border-collapse:collapse;
+cell-spacing:2px;
+}
+td{
+color:#FFFFFF;
+border:5px solid #008000;
+text-align:center;
+vertical-align:middle;
+padding:15px;
+font-size:25px;
+font-family:Garamond;
+}
+th{
+color:#800080;
+border:5px solid #008000;
+text-align:center;
+vertical-align:middle;
+padding:15px;
+font-size:25px;
+font-family:Garamond;
+}
+caption{
+color:#0000FF;
+font-size:50px;
+text-decoration:underline;
+font-family:Comic Sans Ms;
+}
+.search{
+width:200px;
+border-radius:25px;
+border:3px solid #800080;
+}
+input[type="image"]{
+width:21px;
+height:21px;
+border-radius:15px;
+vertical-align:bottom;
+border:3px solid #800080;
+}

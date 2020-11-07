@@ -1,0 +1,72 @@
+/* body{
+    background:url("background_common.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+} */
+.actions{
+    font-size:24px;
+   /* position: top right;
+     margin-right:100px; */
+    
+}
+.actions td{
+    
+    padding: 10px 5px;
+}
+.date{
+    font-family: "Roboto",sans-serif;
+    font-weight: bold;
+    font-size: 24px;
+    text-align: center;
+    text-decoration: underline;
+}
+.activity-container{
+    font-family: "Roboto",sans-serif;
+   width: 40%;
+    height: 150px;
+    margin: 10px auto;
+    
+    
+}
+ .activity{
+    width: 100%;
+    height: 80%;
+    font-size: 25px;
+    color: black;
+    background-color: seashell;
+    border-radius: 20% 10px 10px 20%;
+    margin-top: 6%;
+    box-shadow: 5px 10px rgba(119, 136, 153, 0.65);
+    
+    
+}
+
+.activity .calories{
+    text-decoration-style:italic;
+    text-align: right;
+}
+.activity td{
+    float:middle;
+    align-items:left;
+   
+
+} 
+/*
+.activity .icon {
+    
+    justify-content: right;
+    align-items: center;
+    
+}*/
+.activity .icon img{
+    border-radius: 100%;
+    
+}
+/*
+.form-all{
+
+    width:200px!important;
+    
+    height:200px!important;
+    
+    }*/

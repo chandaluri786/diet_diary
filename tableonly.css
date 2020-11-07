@@ -1,0 +1,14 @@
+table{
+margin-left:auto;
+margin-right:auto;
+border-spacing:50px;
+}
+img{
+height:400px;
+width:400px;
+}
+a{
+color:green;
+font-size:25px;
+font-family:Cambria;
+}

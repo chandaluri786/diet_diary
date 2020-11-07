@@ -1,0 +1,26 @@
+body{
+background-image : url("bgg.jpg");
+background-repeat : no repeat;
+background-attachment:fixed;
+background-size:cover;
+}
+
+h1{
+text-align : center;
+text-decoration:underline;
+color:#FFA500;
+font-size:60px;
+font-family:Comic Sans MS;
+}
+p{
+font-size:25px;
+color:#0000FF;
+font-style:italic;
+}
+h3{
+font-size:35px;
+color:#FF0000;
+font-family: Garamond;
+font-weight:bold;
+text-decoration:underline;
+}

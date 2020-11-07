@@ -1,0 +1,45 @@
+body{
+background-image:url("ex2.jpg");
+background-repeat:no repeat;
+background-attachment:fixed;
+background-size:cover;
+}
+table{
+margin-left:auto;
+margin-right:auto;
+border-spacing:50px;
+padding-left:450px;
+}
+p{
+color:#FFA500;
+font-size:40px;
+font-style:italic;
+font-family:Garamond;
+text-decoration:underline dotted;
+}
+li{
+font-size:22px;
+}
+caption{
+color:#CC0000;
+font-size:50px;
+text-decoration:underline;
+font-family:Comic Sans MS;
+}
+iframe{
+height:300;
+width:700;
+}
+.change{
+color:#0000FF;
+text-decoration:none;
+}
+.cal{
+color:#FFFFFF;
+text-decoration:none;
+font-size:30px;
+}
+h2{
+color:#8B008B;
+font-size:25px;
+}
