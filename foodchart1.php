@@ -2,27 +2,27 @@
 session_start();
 require_once 'connection.php';
 require_once 'sideNavigation.php';
-//require_once 'topNavigation.php';
-//require_once 'header.php';
+require_once 'topNavigation.php';
+require_once 'header.php';
 ?>
 <html>
 <head>
 <link rel = "stylesheet" href = "foodtable.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="sideNavigation.css">
-<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+<script src='https://kit.fontawesome.com/a076d05399.js'>--></script>
 </head>
 <body>
 <div class="main">
 <center>
 <form action ="foodchart1.php" method="POST">
 <input type = "text" id = "search box" class = "search" name = "Search" placeholder = "Search..."/>
-<input type = "image" src = "search 1.png" ">
+<input type = "image" src = "search 1.png" >
 </form>
 </center>
 
 <table>
-<caption>Food Chart</caption>
+<h3 align="center" style='color:blue;text-decoration:underline;font-weight:bold'>Food Chart</h3>
 <th>Item_no</th><th>Item_name</th><th>Quantity(piece/cup/tbsp)</th><th>Calories(kcal)</th>
 <!--
 <tr>

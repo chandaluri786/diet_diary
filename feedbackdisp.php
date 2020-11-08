@@ -2,7 +2,7 @@
 session_start();
 require_once 'connection.php';
 require_once 'sideNavigation.php';
-//require_once 'topNavigation.php';
+require_once 'topNavigation.php';
 require_once 'header.php';
 ?>
 

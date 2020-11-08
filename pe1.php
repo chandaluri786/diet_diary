@@ -2,7 +2,7 @@
 session_start();
 require_once 'connection.php';
 require_once 'header.php';
-//require_once 'topNavigation.php';
+require_once 'topNavigation.php';
 require_once 'sideNavigation.php';
 require_once 'displayactivities.php';
 ?>
@@ -16,11 +16,11 @@ require_once 'displayactivities.php';
             <input type = 'submit' id = "view" name = "view"  value = "view" >
         </form>
         </center>
-<table>
+<table  style="width:100%">
     <tr>
         <td>    
 <?php
-$_SESSION['user_id'] = 3;
+//$_SESSION['user_id'] = 3;
  // display logic
 //retrieving diaryid
 $date = date("Y-m-d");
@@ -104,11 +104,11 @@ foreach ($res as $r) {
  ?>
  </td>
  <td>
-     <table>
+     <table border=2 style="width:100%">
          <tr>
          <td>
- <div class="container1">
-                        <table class="Summary">
+ <div >
+                        <table style="background-color:white;size:16px;width:100%">
                             <tr>
                                 <td>Calories intake:</td>
                                 <td>
@@ -139,23 +139,29 @@ foreach ($res as $r) {
 </td>
 </tr><tr><td>
 
-                <div class="main" id="chartContainer_2" style="height: 250px; width: 100%;"></div>
+                <div  id="chartContainer_2" style="height: 250px; width: 100%;"></div>
+                </td>
+    </tr>
+    </td>
+    </tr>
+    </table>
     
 <?php
-$stmt = $conn -> prepare('select my_diary.date,sum(timediff (my_diary_activity.end_time , my_diary_activity.start_time)/:n ) as sleep from my_diary_activity natural join my_diary 
- where my_diary.user_id=:uid group by my_diary.date having my_diary.date = :d');
-$stmt -> execute(array(':n'=>100,':uid' => $_SESSION['user_id'],':d'=>$date));
+$stmt = $conn -> prepare('select my_diary.date,sum(TIME_TO_SEC(timediff (my_diary_activity.end_time , my_diary_activity.start_time))/:n  ) as sleep from my_diary_activity natural join my_diary 
+ where my_diary.user_id=:uid and my_diary_activity.activity=:a group by my_diary.date having my_diary.date = :d');
+$stmt -> execute(array(':n'=>3600,':uid' => $_SESSION['user_id'],':a' => 'sleep',':d'=>$date));
 $res = $stmt -> fetch(PDO::FETCH_OBJ);
 $dataPoints = array();
 //foreach($res as $r){
-   array_push($dataPoints,array("label"=>"Sleep", "y"=>(($res->sleep)*100/24)));
-   $stmt = $conn -> prepare('select my_diary.date,sum(timediff (my_diary_activity.end_time , my_diary_activity.start_time)/:n ) as hrs from my_diary_activity natural join my_diary  join exercise
-     using (exercise_id) where my_diary.user_id=:uid group by my_diary.date having my_diary.date = :d ');
-     $stmt -> execute(array(':n'=>10000,':uid' => $_SESSION['user_id'],':d'=>$date));
-     $r = $stmt -> fetchall(PDO::FETCH_OBJ);
-     array_push($dataPoints,array("label"=>'Exercise', "y"=> (($r->hrs)*100/24)));
-     array_push($dataPoints,array("label"=>'other', "y"=> 100 - ((($res->sleep)*100/24)+(($r->hrs)*100/24))));
-//}
+   array_push($dataPoints,array("label"=>"Sleep", "y"=>(100/24)*$res->sleep));
+   $stmt = $conn -> prepare('select my_diary.date,sum(TIME_TO_SEC(timediff (my_diary_activity.end_time , my_diary_activity.start_time))/:n ) as hrs from my_diary_activity natural join my_diary  join exercise
+     using (exercise_id) where my_diary_activity.activity=:a and my_diary.user_id=:uid group by my_diary.date having my_diary.date = :d ');
+     $stmt -> execute(array(':n'=>3600,':uid' => $_SESSION['user_id'],':a' => 'exercise',':d'=>$date));
+     $r = $stmt -> fetch(PDO::FETCH_OBJ);
+     array_push($dataPoints,array("label"=>'Exercise', "y"=> (100/24)*$r->hrs));
+     array_push($dataPoints,array("label"=>'other', "y"=> 100-(100/24)*($res->sleep+$r->hrs)));
+//print_r($dataPoints);
+     //}
  /*
  $dataPoints_2 = array( 
      array("label"=>"Oxygen", "symbol" => "O","y"=>46.6),
@@ -179,7 +185,7 @@ $dataPoints = array();
 	theme: "light2",
 	animationEnabled: true,
 	title: {
-		text: "Time distribution"
+		text: "Time distribution "
 	},
 	data: [{
 		type: "pie",
@@ -195,11 +201,7 @@ chart2.render();
      }
      </script>
 </div>
-    </td>
-    </tr>
-    </td>
-    </tr>
-    </table>
+    
  
     </body>
 </html>

@@ -2,8 +2,8 @@
 
     <div class="sidenav">
         <a href="dashboard.php"><i class="fa fa-bar-chart" ></i> Dashboard</a>
-        <a href="#contact"><i class="fa fa-calculator" ></i> BMI calculator</a>
-        <a href="#about"><i class="fa fa-user" ></i> Profile</a>
+        <a href="bmi.php"><i class="fa fa-calculator" ></i> BMI calculator</a>
+        <a href="profile.php"><i class="fa fa-user" ></i> Profile</a>
         <button class="dropdown-btn"><i class="fas fa-utensils" ></i> Health Recipies
         </button>
         <div class="dropdown-container">
@@ -31,4 +31,3 @@
             <a href="feedbackdisp.php">View Feedbacks</a>
         </div>
     </div>
-

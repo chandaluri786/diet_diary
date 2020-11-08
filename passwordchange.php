@@ -2,20 +2,24 @@
 session_start();
 require_once 'connection.php';
 require_once 'sideNavigation.php';
-//require_once 'topNavigation.php';
+require_once 'topNavigation.php';
 require_once 'header.php';
-$_SESSION["user_id"] = "3";
+//$_SESSION["user_id"] = 3;
 //$conn = mysqli_connect("localhost", "root", "test", "blog_samples") or die("Connection Error: " . mysqli_error($conn));
 
-if (count($_POST) > 0) {
-    $result = mysqli_query($conn, "SELECT *from users WHERE user_id='" . $_SESSION["user_id"] . "'");
-    $row = mysqli_fetch_array($result);
+if (isset($_POST['submit'])) {
+    $result = $conn->prepare('select * from users where user_id =:uid and password=:p');
+    $result->execute(array('uid'=> $_SESSION["user_id"],'p'=>$_POST["currentPassword"]));
+    $row = $result->fetch(PDO::FETCH_OBJ);
     print_r($row);
-    if ($_POST["currentPassword"] == $row["password"]) {
-        mysqli_query($conn, "UPDATE users set password='" . $_POST["newPassword"] . "' WHERE user_id='" . $_SESSION["user_id"] . "'");
+    if ($_POST["currentPassword"] == $row->password && $row != NULL) {
+        $result = $conn->prepare('update users set password=:np where user_id=:uid');
+        $result->execute(array('np'=>$_POST["newPassword"] ,'uid'=> $_SESSION["user_id"]));
+        $result->debugDumpParams();
         $message = "Password Changed";
-    } else
+    } else {
         $message = "Current Password is not correct";
+    }
 }
 ?>
 <style>/*body{
@@ -66,18 +70,21 @@ font-weight:italic;
 padding-left:10px;
 }</style>
 <html>
-<head>
-<title>Change Password</title>
-<link rel="stylesheet" type="text/css" href="styles.css" />
-</head>
+
 <body>
-<div class = "main">
-<form name="frmChange" method="post" action="" onSubmit="return validatePassword()">
-<div style="width:500px;">
+<div class="main">
+<h1>&nbsp</h1>
+<h1>&nbsp</h1>
+<h1>&nbsp</h1>
+<h1>&nbsp</h1>
+
+<div>
+<form name="frmChange"class="main"  method="post" action="" onSubmit="return validatePassword()">
+<div style="width:400px;">
 <div class="message"><?php if(isset($message)) { echo $message; } ?></div>
 <table border="0" cellpadding="10" cellspacing="0" width="500" align="center" class="tblSaveForm">
 <tr class="tableheader">
-<td colspan="2">Change Password</td>
+<td colspan="2" style="color:white">Change Password</td>
 </tr>
 <tr>
 <td width="40%"><label>Current Password</label></td>
@@ -100,6 +107,7 @@ padding-left:10px;
 <?php
 require_once 'scripts.php';
 ?>
+</div>
 </div>
 </body></html>
 

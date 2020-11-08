@@ -10,11 +10,30 @@ include_once 'header.php';
 <body>
 <?php
 include_once 'sideNavigation.php';
-//include_once 'topNavigation.php';
+include_once 'topNavigation.php';
 ?>
 
 <?php
 //$_SESSION['user_id'] = 3;
+if (isset($_POST['login'])) {
+    $username = htmlentities($_POST['email']);
+    $password = htmlentities($_POST['pass']);
+ //  echo $password;
+
+    $user = $conn->prepare('select * from users where user_name = :username and password = :password');
+    $user->bindValue(':username', $username, PDO::PARAM_STR);
+    $user->bindValue(':password', $password, PDO::PARAM_STR);
+    $user->execute();
+    $res = $user->fetch(PDO::FETCH_OBJ);
+    if ($res != null) {
+        $_SESSION['user_id'] = $res->user_id;
+        $_SESSION['user_name'] = $res->user_name;
+
+    } else {
+        $_SESSION['error'] = "Incorrect Password";
+        header("Location: login1.php");
+    }
+}
 ?>
 
     <?php
@@ -63,39 +82,27 @@ include_once 'sideNavigation.php';
      }
      ?>
 
-<?php
- 
- $dataPoints_2 = array( 
-     array("label"=>"Oxygen", "symbol" => "O","y"=>46.6),
-     array("label"=>"Silicon", "symbol" => "Si","y"=>27.7),
-     array("label"=>"Aluminium", "symbol" => "Al","y"=>13.9),
-     array("label"=>"Iron", "symbol" => "Fe","y"=>5),
-     array("label"=>"Calcium", "symbol" => "Ca","y"=>3.6),
-     array("label"=>"Sodium", "symbol" => "Na","y"=>2.6),
-     array("label"=>"Magnesium", "symbol" => "Mg","y"=>2.1),
-     array("label"=>"Others", "symbol" => "Others","y"=>1.5),
-  
- )
-  
- ?>
 
 
+<h1 class="main">welcome <?php echo $_SESSION['user_name']?></h1>
   
     <table >
-       
+      
         <tr>
             <td> 
-                <div class="main" id="chartContainer_1" style="height: 250px; width: 100%;"></div>
+                <div class="main" id="chartContainer_1" style="height: 250px; width: 90%;"></div>
     </td>
 
     <td> 
-                <div class="main" id="chartContainer_2" style="height: 250px; width: 100%;"></div>
+                <div class="main" id="chartContainer_2" style="height: 250px; width: 90%;"></div>
     </td>
     <td> 
-                <div class="main" id="chartContainer_3" style="height: 250px; width: 100%;"></div>
+                <div class="main" id="chartContainer_3" style="height: 250px; width: 90%;"></div>
     </td>
     </tr>
     </table>
+
+   
      
 
 <?php
@@ -163,24 +170,7 @@ include_once 'scripts.php';
      });
      chart3.render();
 
-/*
-     var chart2 = new CanvasJS.Chart("chartContainer_2", {
-	theme: "light2",
-	animationEnabled: true,
-	title: {
-		text: "Average Composition of Magma"
-	},
-	data: [{
-		type: "doughnut",
-		indexLabel: "{symbol} - {y}",
-		yValueFormatString: "#,##0.0\"%\"",
-		showInLegend: true,
-		legendText: "{label} : {y}",
-		dataPoints: <?php echo json_encode($dataPoints_2, JSON_NUMERIC_CHECK); ?>
-	}]
-});
-chart2.render();
- */     
+     
      }
      </script>
      </body>

@@ -13,7 +13,7 @@ require_once 'header.php';
 <div class="main">
 <table>
    
-<caption>Excercises</caption>
+<h1 align="center" style='color:blue;text-decoration:underline;font-weight:bold'>Excercises</h1>
 <?php
 $disp = $conn->prepare('select * from exercise');
 $disp->execute();
