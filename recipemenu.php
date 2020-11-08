@@ -2,7 +2,7 @@
 session_start();
 require_once 'connection.php';
 require_once 'sideNavigation.php';
-//require_once 'topNavigation.php';
+require_once 'topNavigation.php';
 require_once 'header.php';
 ?>
 <html>
@@ -11,7 +11,8 @@ require_once 'header.php';
 <link rel = "stylesheet" href ="picslist.css">
 </head>
 <body>
-    <div class="main">
+<div class="main">
+<h1 style="text-decoration:none;">&nbsp</h1>
 <h1><?php echo ucwords($_GET['category'])?> Recipes</h1>
 <table>
 <?php

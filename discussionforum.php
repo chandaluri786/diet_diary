@@ -4,7 +4,7 @@ require_once 'connection.php';
 require_once 'sideNavigation.php';
 require_once 'topNavigation.php';
 require_once 'header.php';
-$_SESSION['user_id']=3;
+//$_SESSION['user_id']=3;
 ?>
 <html>
 <head>

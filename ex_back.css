@@ -1,5 +1,5 @@
 body{
-background-image:url("ex2.jpg");
+background-image:url("ex_new.jpg");
 background-repeat:no repeat;
 background-attachment:fixed;
 background-size:cover;
@@ -35,7 +35,7 @@ color:#0000FF;
 text-decoration:none;
 }
 .cal{
-color:#FFFFFF;
+color#FF1493;
 text-decoration:none;
 font-size:30px;
 }

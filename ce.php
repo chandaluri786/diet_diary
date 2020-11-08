@@ -17,10 +17,10 @@ include_once 'header.php';
 
 <?php
 include_once 'sideNavigation.php';
-//include_once 'topNavigation.php';
+include_once 'topNavigation.php';
 ?>
 <?php
-$_SESSION['user_id'] = 3;
+//$_SESSION['user_id'] = 3;
 
 
 

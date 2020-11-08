@@ -4,7 +4,7 @@ session_start();
 
 require_once 'connection.php';                                                                                                                                                             $_SESSION['user_id'] = 4;
 require_once 'sideNavigation.php';
-//require_once 'topNavigation.php';
+require_once 'topNavigation.php';
 
 //entering the feedback to the database
 
@@ -30,6 +30,7 @@ if (isset($_POST['submit'])) {
 
 <meta charset='UTF-8'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 <link rel="stylesheet" href="sideNavigation.css">
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 <!--<link rel='stylesheet' href='css/style.css'>-->
@@ -58,7 +59,7 @@ body {
 
 
 
-    input[type=text], select, textarea {   
+    input[type=text],  textarea {   
 
   width: 100%;   
 
@@ -170,8 +171,9 @@ input[type=submit]:hover {
 <div class = "main">
 
   
-
-<h1><p style="color:#0066cc" >Feedback Form</h1></p>
+<h1>&nbsp</h1>
+<h1><p style="color:#0066cc;font-weight:bold" >Feedback Form</p></h1>
+<h1>&nbsp</h1>
 
 <div class="container">   
 
@@ -192,7 +194,7 @@ input[type=submit]:hover {
 
       <div class="col-75">   
 
-        <select   name="country">   
+        <select  class="selectpicker" name="country">   
 
             <option value="none">Select Country</option>   
 
