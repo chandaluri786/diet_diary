@@ -111,7 +111,7 @@ CREATE TABLE `feedback` (
   KEY `fk_feedback_users1_idx` (`user_id`),
   CONSTRAINT `fk_feedback_users1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
   CONSTRAINT `feedback_chk_1` CHECK ((`rating` between 0 and 5))
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -120,7 +120,7 @@ CREATE TABLE `feedback` (
 
 LOCK TABLES `feedback` WRITE;
 /*!40000 ALTER TABLE `feedback` DISABLE KEYS */;
-INSERT INTO `feedback` VALUES (2,NULL,4,3,NULL),(6,'good application',4,3,'australia');
+INSERT INTO `feedback` VALUES (6,'good application',4,3,'australia');
 /*!40000 ALTER TABLE `feedback` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -168,7 +168,7 @@ CREATE TABLE `my_diary` (
   PRIMARY KEY (`diary_id`),
   KEY `fk_my_diary_users_idx` (`user_id`),
   CONSTRAINT `fk_my_diary_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -177,7 +177,7 @@ CREATE TABLE `my_diary` (
 
 LOCK TABLES `my_diary` WRITE;
 /*!40000 ALTER TABLE `my_diary` DISABLE KEYS */;
-INSERT INTO `my_diary` VALUES (20,'2020-11-07',3);
+INSERT INTO `my_diary` VALUES (20,'2020-11-07',3),(21,'2020-11-08',3),(22,'2020-11-09',3);
 /*!40000 ALTER TABLE `my_diary` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -211,7 +211,7 @@ CREATE TABLE `my_diary_activity` (
 
 LOCK TABLES `my_diary_activity` WRITE;
 /*!40000 ALTER TABLE `my_diary_activity` DISABLE KEYS */;
-INSERT INTO `my_diary_activity` VALUES ('Breakfast',20,'08:00:00',NULL,29,NULL),('Exercise',20,'05:30:00','05:45:00',NULL,2),('Lunch',20,'13:00:00',NULL,9,NULL),('Sleep',20,'16:00:00','17:00:00',NULL,NULL);
+INSERT INTO `my_diary_activity` VALUES ('Breakfast',20,'08:00:00',NULL,29,NULL),('Breakfast',21,'08:05:00','08:15:00',7,NULL),('Breakfast',22,'08:00:00',NULL,9,NULL),('Dinner',22,'20:30:00','20:50:00',10,NULL),('Exercise',20,'05:30:00','05:45:00',NULL,2),('Lunch',20,'13:00:00',NULL,9,NULL),('Lunch',22,'12:00:00','12:30:00',10,NULL),('Sleep',20,'16:00:00','17:00:00',NULL,NULL),('Sleep',22,'00:34:00','07:34:00',NULL,NULL),('Snacks',22,'06:30:00','06:35:00',1,NULL);
 /*!40000 ALTER TABLE `my_diary_activity` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -237,7 +237,7 @@ CREATE TABLE `profile` (
   PRIMARY KEY (`profile_id`),
   KEY `fk_profile_users1_idx` (`user_id`),
   CONSTRAINT `fk_profile_users1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -246,7 +246,7 @@ CREATE TABLE `profile` (
 
 LOCK TABLES `profile` WRITE;
 /*!40000 ALTER TABLE `profile` DISABLE KEYS */;
-INSERT INTO `profile` VALUES (1,'hxghsxf','hxghsxf','2002-06-21',5.4,100,3,'jshcgsdjhcg@gmail.com',123,'sdhjsdcvshdcg','female');
+INSERT INTO `profile` VALUES (4,'Ssdd','Sssss','2020-11-12',44,44,26,'bl.en.um@bl.students.amrita.edu',96897500000,'Hajskwkw','female'),(7,'Tanmayi','Doddapaneni','2002-06-21',5.5,78,27,'srdhardoddapaneni@gmail.com',8008060000,'None','female'),(8,'Jahnavi S S L','Chandaluri','2001-01-10',5.4,56,28,'abc@edu.com',123457000,'','female');
 /*!40000 ALTER TABLE `profile` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -265,7 +265,7 @@ CREATE TABLE `questions` (
   PRIMARY KEY (`q_id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `questions_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -274,7 +274,7 @@ CREATE TABLE `questions` (
 
 LOCK TABLES `questions` WRITE;
 /*!40000 ALTER TABLE `questions` DISABLE KEYS */;
-INSERT INTO `questions` VALUES (35,3,'hii','2020-11-06 10:42:24'),(36,3,'i am fine thank u ','2020-11-06 10:42:50'),(37,3,'this is another post','2020-11-06 10:54:13'),(38,3,'this is another post','2020-11-06 10:54:33'),(39,3,'good evening ','2020-11-06 13:08:48');
+INSERT INTO `questions` VALUES (44,3,'please add a new item combo in the food chart . Combo name Idli & coconut chutney','2020-11-09 12:44:37');
 /*!40000 ALTER TABLE `questions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -406,7 +406,7 @@ CREATE TABLE `responses` (
   KEY `q_id` (`q_id`),
   CONSTRAINT `responses_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
   CONSTRAINT `responses_ibfk_2` FOREIGN KEY (`q_id`) REFERENCES `questions` (`q_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -415,7 +415,7 @@ CREATE TABLE `responses` (
 
 LOCK TABLES `responses` WRITE;
 /*!40000 ALTER TABLE `responses` DISABLE KEYS */;
-INSERT INTO `responses` VALUES (14,3,'hey',35,'2020-11-06 10:42:29'),(15,3,'how r u',35,'2020-11-06 10:42:35'),(16,3,'nice',36,'2020-11-06 10:43:04'),(17,3,'nice',36,'2020-11-06 10:43:13'),(18,3,'testing',35,'2020-11-06 14:52:29');
+INSERT INTO `responses` VALUES (33,5,'Your Request will be processed shortly',44,'2020-11-09 12:50:03');
 /*!40000 ALTER TABLE `responses` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -462,7 +462,7 @@ CREATE TABLE `users` (
   `password` varchar(8) NOT NULL,
   `category` varchar(15) NOT NULL DEFAULT 'user',
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -471,7 +471,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (3,'user1','abc','user'),(4,'user2','user@123','user'),(5,'admin1','admin@1','admin'),(6,'admin2','admin@2','admin'),(7,'nu1','nu@123','nutritionist'),(8,'coder@123','abc','user'),(9,'user101','abc','user'),(10,'userwer','12345','user'),(11,'','','user'),(12,'sdgdf','abcd','user'),(13,'ZXDCvz','abcd','user'),(14,'SIVANI','123','user'),(15,'Tanmayi','tanu8008','user');
+INSERT INTO `users` VALUES (3,'user1','abc','user'),(4,'user2','user@123','user'),(5,'admin1','admin@1','admin'),(6,'admin2','admin@2','admin'),(7,'nu1','nu@123','nutritionist'),(26,'Xddd','123Aa','user'),(27,'tanmayi','tanu8008','user'),(28,'angel','jaanu','user');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -484,4 +484,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-11-08 19:16:48
+-- Dump completed on 2020-11-10 13:05:42
