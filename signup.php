@@ -175,7 +175,7 @@ button.social-signin:active {
 <div id="login-box">
   <div class="left">
     <h1>Sign Up</h1>
-    <form name = "f1" id="f1" action="signup.php" method="post">
+    <form name = "f1" id="f1" action="login1.php" method="post">
     <input type="text" name="uname" placeholder="User Name"/>
     <input type="text" name="fname" placeholder="First Name"/>
     <input type="text" name="lname" placeholder="Last Name"/>
@@ -200,13 +200,14 @@ button.social-signin:active {
 </form>
   
   </div>
+
   
   <?php
   if(isset($_POST['submit'])){
   $uname=$_POST['uname'];
     $ph_no = $_POST['ph_no'];
     $gender = $_POST['gender'];
-    $sname = $_POST['lname'];
+    $lname = $_POST['lname'];
     $weight=$_POST['weight'];
     $height=$_POST['height'];
     $email = $_POST['email'];
@@ -224,14 +225,25 @@ button.social-signin:active {
         echo '<script>alert("Please give another user name. Thisd one is already taken")</script>';
     }
     else if($password==$repassword ){
-        $stmt = $conn->prepare('insert into users (user_name,password,category) values (:un,:p,:c)');
-        $stmt->execute(array('un'=>$uname, 'p'=>$password,'c'=>'user'));
-        //$stmt->debugDumpParams();
-        $stmt = $conn->prepare('insert into profile (first_name,last_name,dob,height,weight,emil,ph_no,health_history,gender, user_id) values (:f,:l,:d,:h,:w,:e ,:p ,:hh,:g,:id)');
-        $stmt->execute(array('f'=>$fname,'l' => $lname,'d'=>$dob,'h'=> $height,'w'=> $weight,'e'=>$email ,'p'=>$ph_no ,'hh'=>$health_history,'g'=>$gender,'id' => $_SESSION['user_id']));
-        //$stmt->debugDumpParams();
-        header("Location: login.php");
+      try{
+       // $conn->beginTranscation();
+        $stmt0 = $conn->prepare('insert into users (user_name,password,category) values (:un,:p,:c)');
+        $stmt0->execute(array('un'=>$uname, 'p'=>$password,'c'=>'user'));
+        //$conn->commit();
+        $stmt0->debugDumpParams();
+        echo "******" ;
+        $lastInsertId = $conn->lastInsertId();
+        echo $lastInsertId;
+        $stmt = $conn->prepare('insert into profile (first_name,last_name,dob,height,weight,email,ph_no,health_history,gender, user_id) values (:f,:l,:d,:h,:w,:e ,:p ,:hh,:g,:id)');
+        $stmt->execute(array('f'=>$fname,'l' => $lname,'d'=>$dob,'h'=> $height,'w'=> $weight,'e'=>$email ,'p'=>$ph_no ,'hh'=>$health_history,'g'=>$gender,'id' => $lastInsertId ));
+        $stmt->debugDumpParams();
+       // header("Location: login1.php");
       
+      }
+      catch(PDOExeception $ex){
+echo $ex;
+      }
+        
   }else{
     echo '<script>alert("INVALID DEATILS")</script>'; 
   }

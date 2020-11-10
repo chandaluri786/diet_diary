@@ -5,7 +5,7 @@ if(isset( $_SESSION['error']))
 ?>
 <script>
    alert('<?php echo $_SESSION['error']; ?>') ;
-   </script>
+</script>
     <?php
 }
 
@@ -126,6 +126,62 @@ if(isset( $_SESSION['error']))
 <?php
 //include_once('sideNavigation.php');
 //include_once('topNavigation.php');
+?>
+<?php
+require_once 'connection.php';
+?>
+<?php
+  if(isset($_POST['submit'])){
+  $uname=$_POST['uname'];
+    $ph_no = $_POST['ph_no'];
+    $gender = $_POST['gender'];
+    $lname = $_POST['lname'];
+    $weight=$_POST['weight'];
+    $height=$_POST['height'];
+    $email = $_POST['email'];
+    $fname = $_POST['fname'];
+    $health_history = $_POST['health'];
+    $dob = $_POST['dob'];
+    $password = $_POST['password'];
+    $repassword = $_POST['password2'];
+
+    $stmt = $conn->prepare('select * from users where user_name=:u');
+    $stmt->execute(array('u'=>$uname));
+    $res = $stmt->fetchall(PDO::FETCH_OBJ);
+    //print_r($res);
+    if($res != NULL){
+        echo '<script>alert("Please give another user name. This one is already taken.Please Reregister Again!")</script>';
+       
+
+    }
+    else if($password==$repassword ){
+      try{
+       // $conn->beginTranscation();
+        $stmt0 = $conn->prepare('insert into users (user_name,password,category) values (:un,:p,:c)');
+        $stmt0->execute(array('un'=>$uname, 'p'=>$password,'c'=>'user'));
+        //$conn->commit();
+        //$stmt0->debugDumpParams();
+       // echo "******" ;
+        $lastInsertId = $conn->lastInsertId();
+        //echo $lastInsertId;
+        $stmt = $conn->prepare('insert into profile (first_name,last_name,dob,height,weight,email,ph_no,health_history,gender, user_id) values (:f,:l,:d,:h,:w,:e ,:p ,:hh,:g,:id)');
+        $stmt->execute(array('f'=>$fname,'l' => $lname,'d'=>$dob,'h'=> $height,'w'=> $weight,'e'=>$email ,'p'=>$ph_no ,'hh'=>$health_history,'g'=>$gender,'id' => $lastInsertId ));
+        //$stmt->debugDumpParams();
+       // header("Location: login1.php");
+       echo '<script>alert(" Registration Successful...!")</script>';
+       
+      
+      }
+      catch(PDOExeception $ex){
+        echo '<script>alert(" Registration Not Successful...!")</script>';
+//echo $ex;
+      }
+        
+  }else{
+    echo '<script>alert("INVALID DEATILS")</script>'; 
+  }
+}
+
 ?>
 <div class="main">
 <p class="sign" align="center">Sign in</p>

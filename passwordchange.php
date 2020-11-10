@@ -15,7 +15,7 @@ if (isset($_POST['submit'])) {
     if ($_POST["currentPassword"] == $row->password && $row != NULL) {
         $result = $conn->prepare('update users set password=:np where user_id=:uid');
         $result->execute(array('np'=>$_POST["newPassword"] ,'uid'=> $_SESSION["user_id"]));
-        $result->debugDumpParams();
+       // $result->debugDumpParams();
         $message = "Password Changed";
     } else {
         $message = "Current Password is not correct";

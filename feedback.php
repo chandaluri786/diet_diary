@@ -8,7 +8,7 @@ require_once 'topNavigation.php';
 
 //entering the feedback to the database
 
-$_SESSION['user_id']=3;
+//$_SESSION['user_id']=3;
 
 if (isset($_POST['submit'])) {
     $stmt = $conn->prepare('insert into feedback (description,rating,user_id,country) values (:d, :r, :uid,:c)');
@@ -264,7 +264,8 @@ input[type=submit]:hover {
 
     <div class="row">   
 
-      <input type="submit" name="submit" id="submit" value="Submit">   
+      <input type="submit" name="submit" id="submit" value="Submit"> 
+       
 
     </div>   
 
