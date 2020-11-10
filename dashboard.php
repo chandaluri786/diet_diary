@@ -28,7 +28,7 @@ if (isset($_POST['login'])) {
     if ($res != null) {
         $_SESSION['user_id'] = $res->user_id;
         $_SESSION['user_name'] = $res->user_name;
-
+        $_SESSION['category'] =$res->category;
     } else {
         $_SESSION['error'] = "Incorrect Password";
         header("Location: login1.php");
@@ -85,19 +85,22 @@ if (isset($_POST['login'])) {
 
 
 <h1 class="main">welcome <?php echo $_SESSION['user_name']?></h1>
+<h1 class= "main">&nbsp</h1>
+<h1 class= "main">&nbsp</h1>
+<h1 class= "main">&nbsp</h1>
   
     <table >
       
         <tr>
             <td> 
-                <div class="main" id="chartContainer_1" style="height: 250px; width: 90%;"></div>
+                <div class="main" id="chartContainer_1" style="height: 15%; width: 90%;"></div>
     </td>
 
     <td> 
-                <div class="main" id="chartContainer_2" style="height: 250px; width: 90%;"></div>
+                <div class="main" id="chartContainer_2" style="height: 15%; width: 90%;"></div>
     </td>
     <td> 
-                <div class="main" id="chartContainer_3" style="height: 250px; width: 90%;"></div>
+                <div class="main" id="chartContainer_3" style="height: 15%; width: 90%;"></div>
     </td>
     </tr>
     </table>

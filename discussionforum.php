@@ -9,8 +9,15 @@ require_once 'header.php';
 <html>
 <head>
 <style>
+body{
+background-image:url("ex_new.jpg");
+background-repeat:no repeat;
+background-attachment:fixed;
+background-size:cover;
+}
 .questions {
-    position:relative;               
+    position:fixed; 
+    justify-items:center;              
     bottom:0;                            
 }
 </style>
@@ -30,10 +37,11 @@ $stmt->execute(array(':uid' => $_SESSION['user_id'],':q' => $_POST['query'],'t'=
 ?>
 <body>
 <div class="main">
-<div align="center"><h2>Question And Responses</h2>
+<h2>&nbsp</h2>
 <?php
 
-//displaying previous questions and replies
+//displaying previous questions and replies for admin
+if ($_SESSION['category']=="admin"||$_SESSION['category']=="nutritionist") {
 $stmt1 = $conn->prepare('select * from questions,users where questions.user_id = users.user_id');
 $stmt1->execute();
 $res1 = $stmt1->fetchall(PDO::FETCH_OBJ);
@@ -43,7 +51,7 @@ foreach($res1 as $r1 )
 
 echo '<div class="card" style="width: 50%;">
   <div class="card-body">
-      <p class="text-muted" align="left"><span>'.$r1->user_name.'</span><span>'.$r1->timestamp.'</span></p>
+      <p class="text-muted" align="left"><span>'.$r1->user_name.'</span><span>&nbsp'.$r1->timestamp.'</span></p>
       <p class="card-text" align="left">'.$r1->questions.'</p>';
      // echo '<p justify = "right" onclick="toggle()" style = "color:blue; text-decoration:underline; cursor:pointer;">Reply</p>';
       
@@ -54,19 +62,51 @@ echo '<div class="card" style="width: 50%;">
   $res = $stmt->fetchall(PDO::FETCH_OBJ);
   foreach($res as $r){
   echo'<hr>
-      <p class="text-muted" align="left" ><span>'.$r->user_name.'</span><span>'.$r->timestamp.'</span></p>
+      <p class="text-muted" align="left" ><span>'.$r->user_name.'</span><span>&nbsp'.$r->category.'</span><span>&nbsp'.$r->timestamp.'</span></p>
       <p class="card-text" align="left">'.$r->responses.'</p>';
   }
-  echo '<form  class="card-link"  action="discussionforum.php?q='.$r1->q_id.'" method="POST" >
+  
+      echo '<form  class="card-link"  action="discussionforum.php?q='.$r1->q_id.'" method="POST" >
       <textarea name="ans" id ="ans" rows="1" cols="50%"></textarea>
       <input type="submit" name="reply" id="reply" value="Post">
       </form>';
-  echo' </div>
+      echo' </div>
   </div>';
-        
+ 
+  echo '<br>';
   echo '<br>';
 }
+}  
+else{
+  $stmt1 = $conn->prepare('select * from questions,users where questions.user_id = users.user_id and users.user_id=:uid');
+$stmt1->execute(array('uid'=>$_SESSION['user_id']));
+$res1 = $stmt1->fetchall(PDO::FETCH_OBJ);
 
+foreach($res1 as $r1 )
+{
+
+echo '<div class="card" style="width: 50%;">
+  <div class="card-body">
+      <p class="text-muted" align="left"><span>'.$r1->user_name.'</span><span>&nbsp'.$r1->timestamp.'</span></p>
+      <p class="card-text" align="left">'.$r1->questions.'</p>';
+     // echo '<p justify = "right" onclick="toggle()" style = "color:blue; text-decoration:underline; cursor:pointer;">Reply</p>';
+      
+
+ 
+  $stmt = $conn->prepare('select users.user_name as user_name,responses.responses as responses, responses.timestamp as timestamp from responses,users where  responses.q_id = :q and responses.user_id = users.user_id');
+  $stmt->execute(array(':q'=>$r1->q_id));
+  $res = $stmt->fetchall(PDO::FETCH_OBJ);
+  foreach($res as $r){
+  echo'<hr>
+      <p class="text-muted" align="left" ><span>'.$r->user_name.'</span><span>&nbsp'.$r->category.'</span><span>&nbsp'.$r->timestamp.'</span></p>
+      <p class="card-text" align="left">'.$r->responses.'</p>';
+  }
+  
+     
+  echo '<br>';
+  echo '<br>';
+}
+}
 
 ?>
 

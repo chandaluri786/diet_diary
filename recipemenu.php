@@ -20,7 +20,7 @@ $disp = $conn->prepare('select recipe_name,prep_time,cook_time,prep_time+cook_ti
 $disp->execute(['cat' => $_GET['category']]);
 $res = $disp->fetchAll(PDO::FETCH_OBJ);
 foreach($res as $r){
-echo '<tr><td><a href="recipe_back.php?name='.$r->recipe_name.'">'.$r->recipe_name.'</a><br><p class = "aligned"><a href ="recipe_back.php?name='.$r->recipe_name.'"><img src = "'.strtolower($r->recipe_name).'.jpg"></a>Prep Time :'.$r->prep_time.' mins<br>Cook Time : '.$r->cook_time.' mins<br>Total Time: '.$r->total_time.' mins<br>Serves : '.$r->serves.'<br>Calories : '.$r->calories.'kcal per serving</p></td></tr>';}
+echo '<tr><td><u style="color:red;font-weight:bold"><a href="recipe_back.php?name='.$r->recipe_name.'">'.$r->recipe_name.'</a></u><br><p class = "aligned"><a href ="recipe_back.php?name='.$r->recipe_name.'"><img src = "'.strtolower($r->recipe_name).'.jpg"></a>Prep Time :'.$r->prep_time.' mins<br>Cook Time : '.$r->cook_time.' mins<br>Total Time: '.$r->total_time.' mins<br>Serves : '.$r->serves.'<br>Calories : '.$r->calories.'kcal per serving</p></td></tr>';}
 ?>
 <!--<tr>
 <td>

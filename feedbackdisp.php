@@ -53,7 +53,7 @@ margin-top: 10px;
 <h1>All Reviews</h1>
 
  <?php
- $stmt = $conn->prepare('select * from feedback,users where feedback.user_id=users.user_id');
+ $stmt = $conn->prepare('select * from feedback,users where feedback.user_id=users.user_id order by feedback.f_id desc');
 $stmt->execute();
 $res = $stmt->fetchall(PDO::FETCH_OBJ);
 foreach ($res as $r)

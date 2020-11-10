@@ -5,7 +5,7 @@ require_once 'connection.php';
 //require_once 'header.php';
 require_once 'topNavigation.php';
 require_once 'sideNavigation.php';
-$_SESSION['user_id']=3;
+//$_SESSION['user_id']=3;
 ?>
 <html>
     <head>
@@ -32,9 +32,7 @@ $ph = $_POST['phone'];
 $disp = $conn->prepare('update profile set first_name = :f , last_name = :l , dob = :d , height = :h , weight = :w , email = :e, ph_no = :p , health_history = :hh , gender = :g where user_id = :id');
 $disp->execute(['f'=>$fname,'l' => $lname,'d'=>$dob,'h'=> $h,'w'=> $w,'e'=>$e ,'p'=>$ph ,'hh'=>$health,'g'=>$gender,'id' => $_SESSION['user_id']]);
 //$disp->debugDumpParams();
-?><script>alert("Your request has been processed.Changes made successfully.");
-</script>
-<?php
+echo '<script>alert("Your request has been processed.Changes made successfully.");</script>';
 }
 ?>
 <div class="main">
@@ -42,9 +40,11 @@ $disp->execute(['f'=>$fname,'l' => $lname,'d'=>$dob,'h'=> $h,'w'=> $w,'e'=>$e ,'
 <h1><p style="color:#0066cc;font-weight:bold" >Profile</p></h1>
 <h1>&nbsp</h1>
 <?php
-$disp = $conn->prepare('select * from users inner join profile on users.user_id = profile.user_id  where users.user_id = :id');
-$disp->execute(["id" => 3]);
+$disp = $conn->prepare('select * from users inner join profile on users.user_id = profile.user_id  where users.user_id = :uid');
+$disp->execute(array(':uid' => $_SESSION['user_id']));
 $res = $disp->fetch(PDO::FETCH_OBJ);
+//$disp->debugDumpParams();
+//print_r($res);
 echo '<div class="container"><form  action = "profile.php" method = "POST"> <div class="row"> 
 </div>
 

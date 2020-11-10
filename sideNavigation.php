@@ -4,7 +4,7 @@
         <a href="dashboard.php"><i class="fa fa-bar-chart" ></i> Dashboard</a>
         <a href="bmi.php"><i class="fa fa-calculator" ></i> BMI calculator</a>
         <a href="profile.php"><i class="fa fa-user" ></i> Profile</a>
-        <button class="dropdown-btn"><i class="fas fa-utensils" ></i> Health Recipies
+        <button class="dropdown-btn"><i class="fas fa-utensils" ></i> Health Recipes
         </button>
         <div class="dropdown-container">
             <a href="recipemenu.php?category=breakfast">Breakfast</a>
@@ -18,8 +18,8 @@
 
         </button>
         <div class="dropdown-container">
-            <a href="ce.php">Current Entery</a>
-            <a href="pe1.php">Previous Enteries</a>
+            <a href="ce.php">Current Entry</a>
+            <a href="pe1.php">Previous Entries</a>
 
         </div>
         <a href="discussionforum.php"><i class='fas fa-comment' ></i> Discussion Forum</a>
